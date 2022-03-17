@@ -26,11 +26,9 @@ function generatePassword() {
     window.alert("This number is above 128 characters");
     return "Please try again";
   }
-  // WHEN asked for character types to include in the password
-  // THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
-
+ 
   var password = "";
-  var lowerChoice = window.confirm("Do you want lowercase in your password");
+  var lowerChoice = window.confirm("Do you want lowercase letters in your password?");
   console.log(lowerChoice);
   // get one lowercase letter
   // add all lower case letters to the possible combos
@@ -41,7 +39,7 @@ function generatePassword() {
     totalChoices = totalChoices.concat(lowerCase);
   }
 
-  var upperChoice = window.confirm("Do you want uppercase in your password");
+  var upperChoice = window.confirm("Do you want uppercase letters in your password?");
   console.log(upperChoice);
   if (upperChoice == true) {
     var upperIndex = Math.floor(Math.random() * upperCase.length);
@@ -50,9 +48,7 @@ function generatePassword() {
     totalChoices = totalChoices.concat(upperCase);
   }
 
-  var specialCharChoice = window.confirm(
-    "Do you want special characters in your password"
-  );
+  var specialCharChoice = window.confirm("Do you want special characters in your password?");
   console.log(specialCharChoice);
   if (specialCharChoice == true) {
     var charIndex = Math.floor(Math.random() * specialChar.length);
@@ -62,7 +58,7 @@ function generatePassword() {
     console.log(charIndex);
     totalChoices = totalChoices.concat(specialChar);
   }
-  var num = window.confirm("Do you want numbers in your password");
+  var num = window.confirm("Do you want numbers in your password?");
   console.log(num);
   if (num == true) {
     var numbIndex = Math.floor(Math.random() * numbers.length);
@@ -74,13 +70,15 @@ function generatePassword() {
     window.alert("PLEASE SELECT AT LEAST ONE CRITERIA");
     return "";
   }
+  // loop which combines the concated arrays with the prompt answers
   for (let index = password.length; index < aNumber; index++) {
     var indexPull = Math.floor(Math.random() * totalChoices.length);
     var generator = totalChoices[indexPull];
     password += generator;
   }
-  // scrambles password in true random fashion
+  // scrambles password in true random fashion 
   password = [...password].sort(() => Math.random() - 0.5).join("");
+  // wiping array so if user generates another password there is no arrays from previous run
   totalChoices = [];
   return password;
 }
